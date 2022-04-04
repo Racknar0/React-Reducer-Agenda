@@ -1,31 +1,44 @@
-import React from 'react'
+import React from 'react';
 
-const TablaContactos = ({contactos = []}) => {
-  return (
-    <table className='table'>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Número</th>
-                <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            {contactos.map((contacto) => {
-                return <tr key={contacto.id}>
-                    <th>{contacto.id}</th>
-                    <td>{contacto.nombre}</td>
-                    <td>{contacto.numero}</td>
-                    
-                    <td>
-                        <button className='btn btn-danger'>Eliminar</button>
-                    </td>
+const TablaContactos = ({ contactos = [], dispatch }) => {
+    const handleDelete = (id) => {
+        console.log(id);
+    };
+
+    return (
+        <table className="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Número</th>
+                    <th>Acción</th>
                 </tr>
-            })}
-        </tbody>
-    </table>
-  )
-}
+            </thead>
+            <tbody>
+                {contactos.map((contacto) => {
+                    const finalId = contacto.id.split('-')[0];
 
-export default TablaContactos
+                    return (
+                        <tr key={contacto.id}>
+                            <th>{finalId}</th>
+                            <td>{contacto.nombre}</td>
+                            <td>{contacto.numero}</td>
+
+                            <td>
+                                <button
+                                    onClick={() => handleDelete(contacto.id)}
+                                    className="btn btn-danger"
+                                >
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    );
+                })}
+            </tbody>
+        </table>
+    );
+};
+
+export default TablaContactos;
