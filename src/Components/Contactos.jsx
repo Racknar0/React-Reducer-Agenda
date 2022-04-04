@@ -1,31 +1,25 @@
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { ContactosReducer } from '../reducers/ContactosReducer'
 import FormulariAdd from './FormulariAdd'
 import TablaContactos from './TablaContactos'
 
-const contactos = [
-    {
-        id: "0001",
-        nombre: "Camilo",
-        numero: "323346585"
-    },
-    {
-        id: "0002",
-        nombre: "Luis",
-        numero: "45646465"
-    },
-    {
-        id: "0002d",
-        nombre: "Luisa",
-        numero: "45646465"
-    },
-]
 
 const Contactos = () => {
 
-    const [state, dispatch] = useReducer(ContactosReducer, contactos)
+    const init = () => {
+        const contactos = localStorage.getItem('contactos')
+        console.log(contactos);
+        return contactos ? JSON.parse(contactos) : []
+    }
 
+    /* const [state, dispatch] = useReducer(ContactosReducer, []) */
+    const [state, dispatch] = useReducer(ContactosReducer, [], init)
     
+    useEffect(() => {
+      localStorage.setItem('contactos', JSON.stringify(state))
+    }, [state])
+    
+
   return (
     <div className='container mt-3'>
             <FormulariAdd dispatch={dispatch} />

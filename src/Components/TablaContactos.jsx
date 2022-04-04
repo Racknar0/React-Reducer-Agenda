@@ -2,7 +2,12 @@ import React from 'react';
 
 const TablaContactos = ({ contactos = [], dispatch }) => {
     const handleDelete = (id) => {
-        console.log(id);
+       const deleteAction = {
+           type: 'delete',
+           payload: id
+       }
+
+       dispatch(deleteAction)
     };
 
     return (
