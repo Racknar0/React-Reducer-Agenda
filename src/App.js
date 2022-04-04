@@ -1,9 +1,14 @@
 import React from 'react'
-import Header from './Components/Header'
+import Contactos from './components/Contactos'
+import Header from './components/Header'
 
 const App = () => {
   return (
-    <Header />
+    <>
+      <Header />
+      <Contactos />
+    </>
+    
   )
 }
 
